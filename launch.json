@@ -1,0 +1,24 @@
+{
+  "kind": "custom_token",
+  "token": {
+    "contract": "RobobetToken",
+    "name": "robobet",
+    "symbol": "ROBOBET",
+    "decimals": 18,
+    "constructorArgs": [],
+    "totalSupply": "1000000000000000000000000000"
+  },
+  "contracts": [],
+  "pool": {
+    "pairedCurrency": "0xd34a99bc0f67ae1bbd63c660e6d0b0dd03e263b7",
+    "fee": 12500,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "economics": {
+    "poolBps": 6000,
+    "initialMarketCapWei": "5000000000000000000000",
+    "remainderTo": "0xee2aaa315cf7ed169f93148d30d24af9318dbb66"
+  },
+  "notes": "RobobetToken (src/RobobetToken.sol) is a plain fixed-supply OpenZeppelin ERC-20: name robobet, symbol ROBOBET, 18 decimals. Its constructor takes no arguments and mints INITIAL_SUPPLY, 1,000,000,000 * 10^18 = 1000000000000000000000000000 base units, once to msg.sender, which is the factory at launch. There is no owner, no mint or burn entry point after construction, no transfer fee, tax, pause, blacklist, vesting or trading gate, and no proxy, delegatecall or selfdestruct; every transfer delivers the exact amount, so the factory, the pool manager and the launch distributor need no exemptions and the token takes none of the launch placeholders. The launch deploys no application contracts. Tagline: Put your fate in the hands of SUPERINTELLIGENCE. Website: robobet.fun. Pool and economics are the launch's own: paired with IMD at 0xd34a99bc0f67ae1bbd63c660e6d0b0dd03e263b7 at the policy's 1.25% fee with tick spacing 60; 60% of the supply seeds the pool at a 5,000 IMD opening cap, the deployer derives the opening price from economics.initialMarketCapWei and the supply (initialPrice is provenance only), and the requester's remainder goes to 0xee2aaa315cf7ed169f93148d30d24af9318dbb66."
+}
