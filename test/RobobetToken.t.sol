@@ -5,6 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {IERC20Errors} from "@openzeppelin/contracts/interfaces/draft-IERC6093.sol";
 import {RobobetToken} from "../src/RobobetToken.sol";
 
+/// forge-config: default.fuzz.runs = 1000
 contract RobobetTokenTest is Test {
     uint256 internal constant SUPPLY = 1_000_000_000 * 1e18;
 
@@ -311,12 +312,12 @@ contract RobobetTokenTest is Test {
     }
 
     function testFuzz_TransferConservesSupply(address recipient, uint256 amount) public {
-        vm.assume(recipient != address(0) && recipient != deployer);
+        recipient = address(uint160(bound(uint160(recipient), 1, type(uint160).max)));
         amount = bound(amount, 0, SUPPLY);
         vm.prank(deployer);
         assertTrue(token.transfer(recipient, amount));
-        assertEq(token.balanceOf(recipient), amount);
-        assertEq(token.balanceOf(deployer), SUPPLY - amount);
+        assertEq(token.balanceOf(recipient), recipient == deployer ? SUPPLY : amount);
+        assertEq(token.balanceOf(deployer), recipient == deployer ? SUPPLY : SUPPLY - amount);
         assertEq(token.totalSupply(), SUPPLY);
     }
 
